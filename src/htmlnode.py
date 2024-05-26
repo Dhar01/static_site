@@ -1,4 +1,7 @@
 class HTMLNode:
+    """
+    General representation of HTML elements, acting as base class
+    """
     def __init__(self, tag=None, value=None, children=None, props=None) -> None:
         self.tag = tag
         self.value = value
@@ -24,6 +27,10 @@ class HTMLNode:
 
 
 class LeafNode(HTMLNode):
+    """
+    HTML elements with no child elements;
+    contains tag, values and optional properties
+    """
     def __init__(self, tag, value, props=None) -> None:
         super().__init__(tag, value, None, props)
 
@@ -40,6 +47,10 @@ class LeafNode(HTMLNode):
         return f"LeafNode({self.tag}, {self.value}, {self.props})"
 
 class ParentNode(HTMLNode):
+    """
+    HTML elements which contains child elements;
+    contains tag, list of children and optional properties.
+    """
     def __init__(self, tag, children, props=None) -> None:
         super().__init__(tag, None, children, props)
 
