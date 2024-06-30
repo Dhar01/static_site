@@ -32,3 +32,9 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         new_nodes.extend(split_nodes)
 
     return new_nodes
+
+def extract_markdown_images(text):
+    pass
+
+def extract_markdown_links(text):
+    pass
