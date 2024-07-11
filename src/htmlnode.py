@@ -11,7 +11,7 @@ class HTMLNode:
     def props_to_html(self):
         """
         handling attributes and their value
-        for example: href="https://www.google.com"
+        for example--> href="https://www.google.com"
         """
         if self.props is None:
             return ""
@@ -38,12 +38,12 @@ class LeafNode(HTMLNode):
 
         # if there is no value, raise ValueError
         if self.value is None:
-            raise ValueError("Value is None")
+            raise ValueError("Invalid HTML: no value")
         # if there is no tag, return raw text
         elif self.tag is None:
             return self.value
         else:
-            return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>"
+            return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
 
     def __repr__(self) -> str:
         return f"LeafNode({self.tag}, {self.value}, {self.props})"
@@ -58,4 +58,11 @@ PRINTING SECTION TO CHECK OUTPUT
 #     children=None,
 #     props={"class": "Google", "href": "https://google.com"}
 # )
-# print(repr(node))
+
+node = LeafNode(
+    tag="a",
+    value="Click me!",
+    props={"href": "https://www.google.com"}
+)
+
+print(node.to_html())
