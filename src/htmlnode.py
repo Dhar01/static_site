@@ -1,5 +1,5 @@
 class HTMLNode:
-    def __init__(self, tag=None, value=None, children=None, props=None) -> None:
+    def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
         self.value = value
         self.children = children
@@ -21,3 +21,16 @@ class HTMLNode:
 
     def __repr__(self) -> str:
         return f"HTMLNode({self.tag}, {self.value}, children:{self.children}, {self.props})"
+
+
+"""
+PRINTING SECTION TO CHECK OUTPUT
+"""
+
+# node = HTMLNode(
+#     tag="div",
+#     value="Hello, world!",
+#     children=None,
+#     props={"class": "Google", "href": "https://google.com"}
+# )
+# print(repr(node))
