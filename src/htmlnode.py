@@ -34,7 +34,7 @@ class LeafNode(HTMLNode):
     """
     representing single HTML tag with no children --> LeafNode
     """
-    def __init__(self, tag=None, value=None, children=None, props=None):
+    def __init__(self, tag, value, props=None):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
@@ -55,7 +55,7 @@ class ParentNode(HTMLNode):
     """
     handling the nesting of HTML nodes inside of one another --> ParentNode
     """
-    def __init__(self, tag=None, value=None, children=None, props=None):
+    def __init__(self, tag, children, props=None):
         super().__init__(tag, None, children, props)
 
     def to_html(self):
@@ -105,3 +105,7 @@ PRINTING SECTION TO CHECK OUTPUT
 # print(node.to_html())
 
 # print(repr(node))
+
+child_node = LeafNode("span", "child")
+parent_node = ParentNode("div", [child_node])
+print(parent_node.to_html())
