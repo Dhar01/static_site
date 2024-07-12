@@ -22,7 +22,7 @@ class TextNode:
     def __repr__(self) -> str:
         return f"TextNode({self.text}, {self.text_type}, {self.url})"
 
-def text_node_to_html_node(text_node):
+def text_node_to_html_node(text_node: TextNode) -> LeafNode:
     if text_node.text_type == text_type_text:
         return LeafNode(None, text_node.text)
     elif text_node.text_type == text_type_bold:
@@ -34,6 +34,6 @@ def text_node_to_html_node(text_node):
     elif text_node.text_type == text_type_link:
         return LeafNode("a", text_node.text, {"href": text_node.url})
     elif text_node.text_type == text_type_image:
-        return LeafNode("imag", "", {"src": text_node.url, "alt": text_node.text})
+        return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
     else:
         raise Exception("Invalid text_type: text_node.text_type")
