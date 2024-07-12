@@ -1,4 +1,7 @@
 class HTMLNode:
+    """
+    representing a node in an HTML document tree and rendering
+    """
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
         self.value = value
@@ -28,14 +31,13 @@ class HTMLNode:
 
 
 class LeafNode(HTMLNode):
+    """
+    representing single HTML tag with no children --> LeafNode
+    """
     def __init__(self, tag=None, value=None, children=None, props=None):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        """
-        representing single HTML tag with no children --> LeafNode
-        """
-
         # if there is no value, raise ValueError
         if self.value is None:
             raise ValueError("Invalid HTML: no value")
@@ -48,6 +50,31 @@ class LeafNode(HTMLNode):
     def __repr__(self) -> str:
         return f"LeafNode({self.tag}, {self.value}, {self.props})"
 
+
+class ParentNode(HTMLNode):
+    """
+    handling the nesting of HTML nodes inside of one another --> ParentNode
+    """
+    def __init__(self, tag=None, value=None, children=None, props=None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        if self.tag is None:
+            raise ValueError("Invalid HTML: no tags")
+        elif self.children is None:
+            raise ValueError("Invalid HTML: no children")
+        else:
+            child_html = ""
+
+            for child in self.children:
+                child_html += child.to_html()
+
+            return f"<{self.tag}{self.props_to_html()}>{child_html}</{self.tag}>"
+
+    def __repr__(self) -> str:
+        return f"ParentNode({self.tag}, Children: {self.children}, {self.props})"
+
+
 """
 PRINTING SECTION TO CHECK OUTPUT
 """
@@ -59,10 +86,22 @@ PRINTING SECTION TO CHECK OUTPUT
 #     props={"class": "Google", "href": "https://google.com"}
 # )
 
-node = LeafNode(
-    tag="a",
-    value="Click me!",
-    props={"href": "https://www.google.com"}
-)
+# node = LeafNode(
+#     tag="a",
+#     value="Click me!",
+#     props={"href": "https://www.google.com"}
+# )
 
-print(node.to_html())
+# node = ParentNode(
+#     tag="p",
+#     children=[
+#         LeafNode("b", "bold text"),
+#         LeafNode(None, "normal text"),
+#         LeafNode("i", "italic text"),
+#         LeafNode(None, "normal text"),
+#     ],
+# )
+
+# print(node.to_html())
+
+# print(repr(node))
