@@ -106,6 +106,6 @@ PRINTING SECTION TO CHECK OUTPUT
 
 # print(repr(node))
 
-child_node = LeafNode("span", "child")
-parent_node = ParentNode("div", [child_node])
-print(parent_node.to_html())
+# child_node = LeafNode("span", "child")
+# parent_node = ParentNode("div", [child_node])
+# print(parent_node.to_html())
