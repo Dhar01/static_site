@@ -46,15 +46,22 @@ class TestInlineMarkdown(unittest.TestCase):
             ]
         )
 
-    # def test_split_image(self):
-    #     node = TextNode("This is ![image](image.jpg)", text_type_text)
-    #     new_nodes = split_nodes_delimiter([node], "", text_type_image)
-    #     self.assertEqual(
-    #         new_nodes,
-    #         [
-    #             TextNode("This is ", text_type_text)
-    #         ]
-    #     )
+    def test_split_images(self):
+        node = TextNode(
+            "This is text with an ![image](https://www.image.com) and another ![another](https://www.another.com)",
+            text_type_text,
+        )
+        new_nodes = split_nodes_images([node])
+
+        self.assertListEqual(
+            [
+                TextNode("This is text with an ", text_type_text),
+                TextNode("image", text_type_image, "https://www.image.com"),
+                TextNode(" and another ", text_type_text),
+                TextNode("another", text_type_image, "https://www.another.com"),
+            ],
+            new_nodes,
+        )
 
     def test_split_link(self):
         node = TextNode(
