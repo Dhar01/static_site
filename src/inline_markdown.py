@@ -45,7 +45,11 @@ def extract_markdown_links(text: str) -> tuple:
     return re.findall(link_pattern, text)
 
 def split_nodes_images(old_nodes: list[TextNode]) -> list[TextNode]:
-    pass
+    new_nodes = []
+
+    # write later
+
+    return new_nodes
 
 def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
     new_nodes = []
@@ -76,16 +80,3 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
             new_nodes.append(TextNode(original_text, text_type_text))
 
     return new_nodes
-
-# REQUIREMENTS
-
-# node = TextNode("This is text with a `code block` word", text_type_text)
-# new_nodes = split_nodes_delimiter([node], "`", text_type_code)
-
-# #output
-# [
-#     TextNode("This is text with a ", text_type_text),
-#     TextNode("code block", text_type_code),
-#     TextNode(" word", text_type_text),
-# ]
-# print(new_nodes)
