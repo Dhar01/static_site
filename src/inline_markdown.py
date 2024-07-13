@@ -8,7 +8,7 @@ from textnode import(
     text_type_image,
 )
 
-def split_nodes_delimiter(old_nodes: list, delimiter, text_type: str) -> list:
+def split_nodes_delimiter(old_nodes: list[TextNode], delimiter, text_type: str) -> list[TextNode]:
     new_nodes = []
 
     for old_node in old_nodes:
