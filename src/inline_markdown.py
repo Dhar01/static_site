@@ -44,6 +44,39 @@ def extract_markdown_links(text: str) -> tuple:
     link_pattern = r"\[(.*?)\]\((.*?)\)"
     return re.findall(link_pattern, text)
 
+def split_nodes_images(old_nodes: list[TextNode]) -> list[TextNode]:
+    pass
+
+def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
+    new_nodes = []
+
+    for old_node in old_nodes:
+        if old_node.text_type != text_type_text:
+            new_nodes.append(old_node)
+            continue
+
+        original_text = old_node.text
+        links = extract_markdown_links(original_text)
+
+        if len(links) == 0:
+            new_nodes.append(old_node)
+            continue
+
+        for link in links:
+            sections = original_text.split(f"[{link[0]}]({link[1]})", 1)
+            if len(sections) != 2:
+                raise ValueError("Invalid markdown, link section not closed")
+            if sections[0] != "":
+                new_nodes.append(TextNode(sections[0], text_type_text))
+
+            new_nodes.append(TextNode(link[0], text_type_link, link[1]))
+            original_text = sections[1]
+
+        if original_text != "":
+            new_nodes.append(TextNode(original_text, text_type_text))
+
+    return new_nodes
+
 # REQUIREMENTS
 
 # node = TextNode("This is text with a `code block` word", text_type_text)

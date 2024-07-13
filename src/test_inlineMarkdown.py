@@ -1,6 +1,8 @@
 import unittest
 from inline_markdown import (
     split_nodes_delimiter,
+    split_nodes_images,
+    split_nodes_link,
     extract_markdown_images,
     extract_markdown_links,
 )
@@ -53,6 +55,23 @@ class TestInlineMarkdown(unittest.TestCase):
     #             TextNode("This is ", text_type_text)
     #         ]
     #     )
+
+    def test_split_link(self):
+        node = TextNode(
+            "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
+            text_type_text,
+        )
+        new_nodes = split_nodes_link([node])
+
+        self.assertListEqual(
+            new_nodes,
+            [
+                TextNode("This is text with a link ", text_type_text),
+                TextNode("to boot dev", text_type_link, "https://www.boot.dev"),
+                TextNode(" and ", text_type_text),
+                TextNode("to youtube", text_type_link, "https://www.youtube.com/@bootdotdev"),
+            ],
+        )
 
     def test_extract_images(self):
         text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
