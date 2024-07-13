@@ -1,3 +1,5 @@
+import re
+
 from textnode import(
     TextNode,
     text_type_text,
@@ -34,13 +36,20 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter, text_type: str) 
 
     return new_nodes
 
+def extract_markdown_images(text: str) -> tuple:
+    image_pattern = r"!\[(.*?\]\((.*?)\)"
+    data = re.findall(image_pattern, text)
+    return data
+
+def extract_markdown_links(text: str) -> tuple:
+    pass
 
 # REQUIREMENTS
 
 # node = TextNode("This is text with a `code block` word", text_type_text)
 # new_nodes = split_nodes_delimiter([node], "`", text_type_code)
 
-#output
+# #output
 # [
 #     TextNode("This is text with a ", text_type_text),
 #     TextNode("code block", text_type_code),
