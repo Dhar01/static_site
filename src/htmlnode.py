@@ -74,6 +74,11 @@ class ParentNode(HTMLNode):
     def __repr__(self) -> str:
         return f"ParentNode({self.tag}, Children: {self.children}, {self.props})"
 
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
 
 """
 PRINTING SECTION TO CHECK OUTPUT

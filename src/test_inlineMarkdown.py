@@ -5,7 +5,7 @@ from inline_markdown import (
     split_nodes_link,
     extract_markdown_images,
     extract_markdown_links,
-    text_to_textnodes,
+    text_to_textNodes,
 )
 
 from textnode import(
@@ -105,7 +105,7 @@ class TestInlineMarkdown(unittest.TestCase):
 
     def test_conversion_textnode(self):
         text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
-        result = text_to_textnodes(text)
+        result = text_to_textNodes(text)
         self.assertListEqual(
             result,
             [
