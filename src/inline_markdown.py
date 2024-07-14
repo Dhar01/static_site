@@ -72,7 +72,7 @@ def split_contents(old_nodes: list[TextNode], text_type: str, extraction_func) -
 
             if len(sections) != 2:
                 raise ValueError("Invalid markdown, element section is not closed") # need to show proper messages
-            elif sections[0] != "":
+            if sections[0] != "":
                 new_nodes.append(TextNode(sections[0], text_type_text))
 
             new_nodes.append(TextNode(element[0], text_type, element[1]))
