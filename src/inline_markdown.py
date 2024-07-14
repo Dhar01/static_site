@@ -1,4 +1,5 @@
 import re
+from typing import Text
 
 from textnode import(
     TextNode,
@@ -10,7 +11,7 @@ from textnode import(
     text_type_image,
 )
 
-def split_nodes_delimiter(old_nodes: list[TextNode], delimiter, text_type: str) -> list[TextNode]:
+def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: str) -> list[TextNode]:
     new_nodes = []
 
     for old_node in old_nodes:
@@ -36,11 +37,11 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter, text_type: str) 
 
     return new_nodes
 
-def extract_markdown_images(text: str) -> tuple:
+def extract_markdown_images(text: str) -> list:
     image_pattern = r"!\[(.*?)\]\((.*?)\)"
     return re.findall(image_pattern, text)
 
-def extract_markdown_links(text: str) -> tuple:
+def extract_markdown_links(text: str) -> list:
     link_pattern = r"\[(.*?)\]\((.*?)\)"
     return re.findall(link_pattern, text)
 
@@ -103,3 +104,15 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
             new_nodes.append(TextNode(original_text, text_type_text))
 
     return new_nodes
+
+def text_to_textnodes(text: str) -> list[TextNode]:
+    node = TextNode(text, text_type_text)
+    result = split_nodes_delimiter(split_nodes_link(split_nodes_images([node])), "`", text_type_code)
+    result = split_nodes_delimiter(result, "**", text_type_bold)
+    result = split_nodes_delimiter(result, "*", text_type_italic)
+
+    return result
+
+
+# text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
+# print(text_to_textnodes(text))
