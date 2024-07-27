@@ -1,4 +1,6 @@
 from htmlnode import ParentNode
+from textnode import text_node_to_html_node
+from inline_markdown import text_to_textNodes
 
 block_type_paragraph = "paragraph"
 block_type_heading = "heading"
@@ -6,7 +8,6 @@ block_type_code = "code"
 block_type_quote = "quote"
 block_type_ulist = "unordered_list"
 block_type_olist = "ordered_list"
-
 
 def markdown_to_blocks(markdown: str) -> list:
     """breaking into blocks"""
@@ -64,48 +65,10 @@ def block_to_block_type(md_block: str) -> str:
 
     pass
 
-def paragraph_to_htmlNode(block: str) -> ParentNode:
 
-def heading_to_htmlNode(block: str) -> ParentNode:
-    pass
+    return children
 
-def code_to_htmlNode(block: str) -> ParentNode:
-    pass
-
-def quote_to_htmlNode(block: str) -> ParentNode:
-    pass
-
-def ulist_to_htmlNode(block: str) -> ParentNode:
-    pass
-
-def olist_to_htmlNode(block: str) -> ParentNode:
-    pass
-
-def text_to_children(text: str) -> list:
-    values = []
-
-    return values
-
-def block_to_htmlNode(block: str) -> ParentNode:
-    block_type = block_to_block_type(block)
-
-    if block_type == block_type_paragraph:
-        return paragraph_to_htmlNode(block)
-    elif block_type == block_type_heading:
-        return heading_to_htmlNode(block)
-    elif block_type == block_type_code:
-        return code_to_htmlNode(block)
-    elif block_type == block_type_quote:
-        return quote_to_htmlNode(block)
-    elif block_type == block_type_olist:
-        return olist_to_htmlNode(block)
-    elif block_type == block_type_ulist:
-        return ulist_to_htmlNode(block)
-    else:
-        raise ValueError("Invalid block type")
-
-
-def markdown_to_html_node(markdown):
-    blocks = markdown_to_blocks(markdown)
-    for block in blocks:
-        node = block_to_htmlNode(block)
+# def markdown_to_html_node(markdown):
+#     blocks = markdown_to_blocks(markdown)
+#     for block in blocks:
+#         node = block_to_htmlNode(block)
