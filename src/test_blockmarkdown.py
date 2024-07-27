@@ -1,5 +1,4 @@
 import unittest
-from unittest import result
 
 from block_markdown import (
     markdown_to_blocks,
@@ -51,7 +50,7 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
         result = block_to_block_type("* some order")
         self.assertEqual(result, block_type_ulist)
 
-        result = block_to_block_type("1. some unorder]\n2. another unorder")
+        result = block_to_block_type("1. some unorder\n2. another unorder")
         self.assertEqual(result, block_type_olist)
 
 if __name__ == "__main__":

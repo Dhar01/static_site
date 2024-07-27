@@ -1,5 +1,4 @@
 import re
-from typing import Text
 
 from textnode import(
     TextNode,
@@ -99,7 +98,7 @@ def text_to_textNodes(text: str) -> list[TextNode]:
 
 def main():
     text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
-    print(text_to_textnodes(text))
+    print(text_to_textNodes(text))
 
 if __name__ == "__main__":
     main()
