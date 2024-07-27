@@ -68,7 +68,47 @@ def block_to_block_type(md_block: str) -> str:
 
     return children
 
-# def markdown_to_html_node(markdown):
-#     blocks = markdown_to_blocks(markdown)
-#     for block in blocks:
-#         node = block_to_htmlNode(block)
+def markdown_to_html_node(markdown) -> ParentNode:
+    blocks = markdown_to_blocks(markdown)
+    children = []
+    for block in blocks:
+        node = block_to_htmlNode(block)
+        children.append(node)
+
+    return ParentNode("div", children, None)
+
+def block_to_htmlNode(block: str) -> ParentNode:
+    block_type = block_to_block_type(block)
+
+    if block_type == block_type_paragraph:
+        return paragraph_to_htmlNode(block)
+    elif block_type == block_type_heading:
+        return heading_to_htmlNode(block)
+    elif block_type == block_type_code:
+        return code_to_htmlNode(block)
+    elif block_type == block_type_quote:
+        return quote_to_htmlNode(block)
+    elif block_type == block_type_ulist:
+        return ulist_to_htmlNode(block)
+    elif block_type == block_type_olist:
+        return olist_to_htmlNode(block)
+    else:
+        raise ValueError("Invalid Block Type")
+
+def paragraph_to_htmlNode(block: str) -> ParentNode:
+    pass
+
+def heading_to_htmlNode(block: str) -> ParentNode:
+    pass
+
+def code_to_htmlNode(block: str) -> ParentNode:
+    pass
+
+def quote_to_htmlNode(block: str) -> ParentNode:
+    pass
+
+def ulist_to_htmlNode(block: str) -> ParentNode:
+    pass
+
+def olist_to_htmlNode(block: str) -> ParentNode:
+    pass
