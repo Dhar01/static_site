@@ -71,6 +71,7 @@ def block_to_block_type(md_block: str) -> str:
 def markdown_to_html_node(markdown) -> ParentNode:
     blocks = markdown_to_blocks(markdown)
     children = []
+
     for block in blocks:
         node = block_to_htmlNode(block)
         children.append(node)
@@ -95,20 +96,29 @@ def block_to_htmlNode(block: str) -> ParentNode:
     else:
         raise ValueError("Invalid Block Type")
 
+def text_to_children(text: str) -> list:
+    pass
+
 def paragraph_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("p", value)
 
 def heading_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("h", value)
 
 def code_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("code", value)
 
 def quote_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("blockquote", value)
 
 def ulist_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("ul", value)
 
 def olist_to_htmlNode(block: str) -> ParentNode:
     pass
+    # return ParentNode("ol", value)
