@@ -152,7 +152,15 @@ def ulist_to_htmlNode(block: str) -> ParentNode:
     return ParentNode("ul", children)
 
 def olist_to_htmlNode(block: str) -> ParentNode:
-    pass
+    lines = block.split('\n')
+    children = []
+
+    for line in lines:
+        text = line[3:]
+        result = text_to_children(text)
+        children.append(ParentNode("li", result))
+
+    return ParentNode("ol", children)
 
 def main():
     data = "Two options\n\n- This is\n- This was"
