@@ -18,6 +18,12 @@ def extract_markdown_links(text: str) -> list:
     link_pattern = r"\[(.*?)\]\((.*?)\)"
     return re.findall(link_pattern, text)
 
+def split_nodes_images(old_nodes: list[TextNode]) -> list[TextNode]:
+    return split_contents(old_nodes, text_type_image, extract_markdown_images)
+
+def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
+    return split_contents(old_nodes, text_type_link, extract_markdown_links)
+
 def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: str) -> list[TextNode]:
     new_nodes = []
 
@@ -30,7 +36,7 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: 
         sections = old_node.text.split(delimiter)
 
         if len(sections) % 2 == 0:
-            raise ValueError("Invalid Markdown Syntax")
+            raise ValueError("Invalid Markdown, formatted section not closed.")
 
         for i in range(len(sections)):
             if sections[i] == "":
@@ -81,12 +87,6 @@ def split_contents(old_nodes: list[TextNode], text_type: str, extraction_func) -
             new_nodes.append(TextNode(original_text, text_type_text))
 
     return new_nodes
-
-def split_nodes_images(old_nodes: list[TextNode]) -> list[TextNode]:
-    return split_contents(old_nodes, text_type_image, extract_markdown_images)
-
-def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
-    return split_contents(old_nodes, text_type_link, extract_markdown_links)
 
 def text_to_textNodes(text: str) -> list[TextNode]:
     node = TextNode(text, text_type_text)

@@ -38,7 +38,7 @@ class TestHTMLNode(unittest.TestCase):
 
         self.assertEqual(
             repr(node),
-            "HTMLNode(div, Hello, world!, children:None, {'class': 'greeting', 'href': 'https://boot.dev'})",
+            "HTMLNode(div, Hello, world!, children: None, {'class': 'greeting', 'href': 'https://boot.dev'})",
         )
 
     #### LeafNode ####

@@ -119,6 +119,7 @@ def code_to_htmlNode(block: str) -> ParentNode:
 def quote_to_htmlNode(block: str) -> ParentNode:
     lines = block.split('\n')
     data = []
+
     for line in lines:
         if not line.startswith("> "):
             raise ValueError("Invalid quote block")
@@ -129,11 +130,16 @@ def quote_to_htmlNode(block: str) -> ParentNode:
     return ParentNode("blockquote", children)
 
 def ulist_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # more code
+    lines = block.split('\n')
+    children = []
 
-    # children = text_to_children(unordered_list)
-    # return ParentNode("ul", children)
+    for line in lines:
+        text = line[2:]
+        print(text)
+        result = text_to_children(text)
+        children.append(ParentNode("li", result))
+
+    return ParentNode("ul", children)
 
 def olist_to_htmlNode(block: str) -> ParentNode:
     pass
@@ -141,3 +147,12 @@ def olist_to_htmlNode(block: str) -> ParentNode:
 
     # children = text_to_children(ordered_list)
     # return ParentNode("ol", children)
+
+def main():
+    data = "- This is\n- This was"
+    result = markdown_to_html_node(data)
+
+    print(result)
+
+if __name__ == "__main__":
+    main()
