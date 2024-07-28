@@ -117,16 +117,27 @@ def code_to_htmlNode(block: str) -> ParentNode:
     # return ParentNode("code", value)
 
 def quote_to_htmlNode(block: str) -> ParentNode:
-    # more code
+    lines = block.split('\n')
+    data = []
+    for line in lines:
+        if not line.startswith("> "):
+            raise ValueError("Invalid quote block")
+        data.append(line.lstrip("> ").strip())
+
+    quotes = " ".join(data)
     children = text_to_children(quotes)
     return ParentNode("blockquote", children)
 
 def ulist_to_htmlNode(block: str) -> ParentNode:
+    pass
     # more code
-    children = text_to_children(unordered_list)
-    return ParentNode("ul", children)
+
+    # children = text_to_children(unordered_list)
+    # return ParentNode("ul", children)
 
 def olist_to_htmlNode(block: str) -> ParentNode:
+    pass
     # more code
-    children = text_to_children(ordered_list)
-    return ParentNode("ol", children)
+
+    # children = text_to_children(ordered_list)
+    # return ParentNode("ol", children)
