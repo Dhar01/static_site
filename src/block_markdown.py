@@ -103,8 +103,10 @@ def text_to_children(text: str) -> list[ParentNode]:
     return children
 
 def paragraph_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # return ParentNode("p", value)
+    lines = block.split('\n')
+    paragraph = " ".join(lines)
+    children = text_to_children(paragraph)
+    return ParentNode("p", children)
 
 def heading_to_htmlNode(block: str) -> ParentNode:
     pass
@@ -116,7 +118,8 @@ def code_to_htmlNode(block: str) -> ParentNode:
 
 def quote_to_htmlNode(block: str) -> ParentNode:
     pass
-    # return ParentNode("blockquote", value)
+    # quotes = text_to_children(block)
+    # return ParentNode("blockquote", quotes)
 
 def ulist_to_htmlNode(block: str) -> ParentNode:
     pass
