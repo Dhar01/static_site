@@ -55,12 +55,16 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
         self.assertEqual(result, block_type_olist)
 
     def test_paragraphs(self):
-        data = "This is **bolded** paragraph.\nLet's see what it can do. I don't know.\nThree lines? Wow!"
+        data = """
+This is **bolded** paragraph.
+Let's see what it can do. I don't know.
+Three lines? Wow!
+"""
         node = markdown_to_html_node(data)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><p>This is <b>bolded</b> paragraph. Let's see what it can do. I don't know. Three lines? Wow!</p></div>"
+            "<div><p>This is <b>bolded</b> paragraph. Let's see what it can do. I don't know. Three lines? Wow!</p></div>",
         )
 
     def test_lists(self):
@@ -70,7 +74,18 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
         pass
 
     def test_quote(self):
-        pass
+        data = """
+> This is quote.
+> Is it okay to see?
+
+Change the subject. Shall we?
+"""
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><blockquote>This is quote. Is it okay to see?</blockquote><p>Change the subject. Shall we?</p></div>",
+        )
 
 if __name__ == "__main__":
     unittest.main()
