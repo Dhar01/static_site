@@ -3,6 +3,7 @@ import unittest
 from block_markdown import (
     markdown_to_blocks,
     block_to_block_type,
+    markdown_to_html_node,
     block_type_heading,
     block_type_paragraph,
     block_type_code,
@@ -52,6 +53,24 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
 
         result = block_to_block_type("1. some unorder\n2. another unorder")
         self.assertEqual(result, block_type_olist)
+
+    def test_paragraphs(self):
+        data = "This is **bolded** paragraph.\nLet's see what it can do. I don't know.\nThree lines? Wow!"
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><p>This is <b>bolded</b> paragraph. Let's see what it can do. I don't know. Three lines? Wow!</p></div>"
+        )
+
+    def test_lists(self):
+        pass
+
+    def test_code(self):
+        pass
+
+    def test_quote(self):
+        pass
 
 if __name__ == "__main__":
     unittest.main()

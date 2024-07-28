@@ -117,14 +117,16 @@ def code_to_htmlNode(block: str) -> ParentNode:
     # return ParentNode("code", value)
 
 def quote_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # quotes = text_to_children(block)
-    # return ParentNode("blockquote", quotes)
+    # more code
+    children = text_to_children(quotes)
+    return ParentNode("blockquote", children)
 
 def ulist_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # return ParentNode("ul", value)
+    # more code
+    children = text_to_children(unordered_list)
+    return ParentNode("ul", children)
 
 def olist_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # return ParentNode("ol", value)
+    # more code
+    children = text_to_children(ordered_list)
+    return ParentNode("ol", children)
