@@ -22,7 +22,7 @@ def markdown_to_blocks(markdown: str) -> list:
 
 def block_to_block_type(md_block: str) -> str:
     """inspect markdown and determine the type of the block"""
-    lines = md_block.split("\n")
+    lines = md_block.split('\n')
 
     if (
         md_block.startswith("# ")
@@ -41,23 +41,29 @@ def block_to_block_type(md_block: str) -> str:
         return block_type_code
 
     elif md_block.startswith("> "):
-        for line in lines:
-            if not line.startswith(">"):
-                return block_type_paragraph
+
+        # for line in lines:
+        #     if not line.startswith(">"):
+        #         return block_type_paragraph
+
         return block_type_quote
 
     elif md_block.startswith("* ") or md_block.startswith("- "):
-        for line in lines:
-            if not line.startswith("* ") or line.startswith("- "):
-                return block_type_paragraph
+
+        # for line in lines:
+        #     if not line.startswith("* ") or line.startswith("- "):
+        #         return block_type_paragraph
+
         return block_type_ulist
 
     elif md_block.startswith("1. "):
         number = 1
-        for line in lines:
-            if not line.startswith(f"{number}. "):
-                return block_type_paragraph
-            number += 1
+
+        # for line in lines:
+        #     if not line.startswith(f"{number}. "):
+        #         return block_type_paragraph
+        #     number += 1
+
         return block_type_olist
 
     else:
@@ -94,8 +100,8 @@ def block_to_HTMLNode(block: str) -> ParentNode:
 
 def text_to_children(text: str) -> list[ParentNode]:
     children = []
-
     textNodes = text_to_textNodes(text)
+
     for textNode in textNodes:
         htmlNode = text_node_to_html_node(textNode)
         children.append(htmlNode)
@@ -135,7 +141,6 @@ def ulist_to_htmlNode(block: str) -> ParentNode:
 
     for line in lines:
         text = line[2:]
-        print(text)
         result = text_to_children(text)
         children.append(ParentNode("li", result))
 
@@ -149,10 +154,10 @@ def olist_to_htmlNode(block: str) -> ParentNode:
     # return ParentNode("ol", children)
 
 def main():
-    data = "- This is\n- This was"
+    data = "Two options\n\n- This is\n- This was"
     result = markdown_to_html_node(data)
 
-    print(result)
+    print(f"\n {result}")
 
 if __name__ == "__main__":
     main()
