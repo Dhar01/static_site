@@ -69,15 +69,15 @@ Three lines? Wow!
 
     def test_lists(self):
         data = """
-- Check the facts.
-- Evaluate and verify it.
-- And present it.
+- This is a list
+- with items
+- and *more* items
 """
         node = markdown_to_html_node(data)
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ul><li>Check the facts.</li><li>Evaluate and verify it.</li><li>And present it.</li></ul></div>"
+            "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></u></div>",
         )
 
     def test_code(self):
