@@ -103,7 +103,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ]
         )
 
-    def test_conversion_textnode(self):
+    def test_conversion_textNode(self):
         text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
         result = text_to_textNodes(text)
         self.assertListEqual(

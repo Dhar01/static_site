@@ -68,7 +68,17 @@ Three lines? Wow!
         )
 
     def test_lists(self):
-        pass
+        data = """
+- Check the facts.
+- Evaluate and verify it.
+- And present it.
+"""
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ul><li>Check the facts.</li><li>Evaluate and verify it.</li><li>And present it.</li></ul></div>"
+        )
 
     def test_code(self):
         pass
