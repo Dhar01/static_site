@@ -63,22 +63,18 @@ def block_to_block_type(md_block: str) -> str:
     else:
         return block_type_paragraph
 
-    pass
-
-
-    return children
-
 def markdown_to_html_node(markdown) -> ParentNode:
+    """Convert a full Markdown into a single HTMLNode"""
     blocks = markdown_to_blocks(markdown)
     children = []
 
     for block in blocks:
-        node = block_to_htmlNode(block)
+        node = block_to_HTMLNode(block)
         children.append(node)
 
     return ParentNode("div", children, None)
 
-def block_to_htmlNode(block: str) -> ParentNode:
+def block_to_HTMLNode(block: str) -> ParentNode:
     block_type = block_to_block_type(block)
 
     if block_type == block_type_paragraph:
@@ -96,8 +92,15 @@ def block_to_htmlNode(block: str) -> ParentNode:
     else:
         raise ValueError("Invalid Block Type")
 
-def text_to_children(text: str) -> list:
-    pass
+def text_to_children(text: str) -> list[ParentNode]:
+    children = []
+
+    textNodes = text_to_textNodes(text)
+    for textNode in textNodes:
+        htmlNode = text_node_to_html_node(textNode)
+        children.append(htmlNode)
+
+    return children
 
 def paragraph_to_htmlNode(block: str) -> ParentNode:
     pass

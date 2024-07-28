@@ -1,7 +1,5 @@
 class HTMLNode:
-    """
-    representing a node in an HTML document tree and rendering
-    """
+    """Representing a node in an HTML document tree and rendering"""
     def __init__(self, tag=None, value=None, children=None, props=None) -> None:
         self.tag = tag
         self.value = value
@@ -31,9 +29,7 @@ class HTMLNode:
 
 
 class LeafNode(HTMLNode):
-    """
-    representing single HTML tag with no children --> LeafNode
-    """
+    """Representing single HTML tag with no children --> LeafNode"""
     def __init__(self, tag, value, props=None) -> None:
         super().__init__(tag, value, None, props)
 
@@ -52,9 +48,7 @@ class LeafNode(HTMLNode):
 
 
 class ParentNode(HTMLNode):
-    """
-    handling the nesting of HTML nodes inside of one another --> ParentNode
-    """
+    """Handling the nesting of HTML nodes inside of one another --> ParentNode"""
     def __init__(self, tag, children, props=None) -> None:
         super().__init__(tag, None, children, props)
 
@@ -79,38 +73,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-"""
-PRINTING SECTION TO CHECK OUTPUT
-"""
-
-# node = HTMLNode(
-#     tag="div",
-#     value="Hello, world!",
-#     children=None,
-#     props={"class": "Google", "href": "https://google.com"}
-# )
-
-# node = LeafNode(
-#     tag="a",
-#     value="Click me!",
-#     props={"href": "https://www.google.com"}
-# )
-
-# node = ParentNode(
-#     tag="p",
-#     children=[
-#         LeafNode("b", "bold text"),
-#         LeafNode(None, "normal text"),
-#         LeafNode("i", "italic text"),
-#         LeafNode(None, "normal text"),
-#     ],
-# )
-
-# print(node.to_html())
-
-# print(repr(node))
-
-# child_node = LeafNode("span", "child")
-# parent_node = ParentNode("div", [child_node])
-# print(parent_node.to_html())

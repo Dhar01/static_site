@@ -39,5 +39,8 @@ def text_node_to_html_node(text_node: TextNode) -> LeafNode:
     else:
         raise Exception("Invalid text_type: text_node.text_type")
 
-if __name__ == "__main__":
+def main():
     pass
+
+if __name__ == "__main__":
+    main()
