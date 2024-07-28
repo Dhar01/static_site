@@ -67,7 +67,7 @@ Three lines? Wow!
             "<div><p>This is <b>bolded</b> paragraph. Let's see what it can do. I don't know. Three lines? Wow!</p></div>",
         )
 
-    def test_lists(self):
+    def test_unOrderLists(self):
         data = """
 - This is a list
 - with items
@@ -78,6 +78,19 @@ Three lines? Wow!
         self.assertEqual(
             html,
             "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></ul></div>",
+        )
+
+    def test_orderLists(self):
+        data = """
+1. This is an `ordered` list
+2. with items
+3. and more items
+"""
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol><li>This is an <code>ordered</code> list</li><li>with items</li><li>and more items</li></ol></div>",
         )
 
     def test_code(self):
