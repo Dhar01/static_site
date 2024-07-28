@@ -77,11 +77,21 @@ Three lines? Wow!
         html = node.to_html()
         self.assertEqual(
             html,
-            "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></u></div>",
+            "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></ul></div>",
         )
 
     def test_code(self):
-        pass
+        data = """
+```
+python = input()
+```
+"""
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><pre><code>python = input()\n</code></pre></div>"
+        )
 
     def test_quote(self):
         data = """
