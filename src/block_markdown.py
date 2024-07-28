@@ -1,3 +1,4 @@
+from signal import raise_signal
 from htmlnode import ParentNode
 from textnode import text_node_to_html_node
 from inline_markdown import text_to_textNodes
@@ -119,8 +120,12 @@ def heading_to_htmlNode(block: str) -> ParentNode:
     # return ParentNode("h", value)
 
 def code_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # return ParentNode("code", value)
+    if not block.startswith("```") or not block.startswith("```"):
+        raise ValueError("Invalid code block")
+    text = block[4:-3]
+    children = text_to_children(text)
+    code = ParentNode("code", children)
+    return ParentNode("pre", [code])
 
 def quote_to_htmlNode(block: str) -> ParentNode:
     lines = block.split('\n')
@@ -148,10 +153,6 @@ def ulist_to_htmlNode(block: str) -> ParentNode:
 
 def olist_to_htmlNode(block: str) -> ParentNode:
     pass
-    # more code
-
-    # children = text_to_children(ordered_list)
-    # return ParentNode("ol", children)
 
 def main():
     data = "Two options\n\n- This is\n- This was"
