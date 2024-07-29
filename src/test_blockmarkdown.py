@@ -120,5 +120,20 @@ Change the subject. Shall we?
             "<div><blockquote>This is quote. Is it okay to see?</blockquote><p>Change the subject. Shall we?</p></div>",
         )
 
+    def test_headings(self):
+        data = """
+# This is Heading
+
+this is paragraph
+
+### This is h3
+"""
+        node = markdown_to_html_node(data)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><h1>This is Heading</h1><p>this is paragraph</p><h3>This is h3</h3></div>",
+        )
+
 if __name__ == "__main__":
     unittest.main()
