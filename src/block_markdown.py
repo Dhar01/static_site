@@ -116,8 +116,12 @@ def paragraph_to_htmlNode(block: str) -> ParentNode:
     return ParentNode("p", children)
 
 def heading_to_htmlNode(block: str) -> ParentNode:
-    pass
-    # return ParentNode("h", value)
+    number = block.count('#')
+    if number > 6 or number < 1:
+        raise ValueError(f"Invalid heading level: {number}")
+    text = block[number+1:]
+    children = text_to_children(text)
+    return ParentNode(f"h{number}", children)
 
 def code_to_htmlNode(block: str) -> ParentNode:
     if not block.startswith("```") or not block.startswith("```"):
