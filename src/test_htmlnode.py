@@ -27,7 +27,6 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(node.children, None)
         self.assertEqual(node.props, None)
 
-
     def test_HTMLrepr(self):
         node = HTMLNode(
             "div",
@@ -67,7 +66,6 @@ class TestHTMLNode(unittest.TestCase):
             parent_node.to_html(),
             "<div><span>child</span></div>",
         )
-
 
     def test_to_html_manyChild(self):
         node = ParentNode(

@@ -70,7 +70,7 @@ def block_to_block_type(md_block: str) -> str:
     else:
         return block_type_paragraph
 
-def markdown_to_html_node(markdown) -> ParentNode:
+def markdown_to_html_node(markdown: str) -> ParentNode:
     """Convert a full Markdown into a single HTMLNode"""
     blocks = markdown_to_blocks(markdown)
     children = []
