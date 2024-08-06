@@ -4,6 +4,7 @@ import logging
 from textnode import TextNode
 from genericpath import exists, isfile
 
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 def clear_directory(path: str) -> None:
     if os.path.exists("public"):
@@ -21,18 +22,10 @@ def copy_statToPub_contents(src: str, dest: str) -> None:
 
         if os.path.isdir(source):
             shutil.copytree(source, destination)
-            # implement logging
+            logging.info(f"Directory copied: {destination}")
         else:
             shutil.copy(source, destination)
-            # implement logging
-
-    # if os.path.exists("public"):
-    #     for file in os.listdir('static'):
-    #         if os.path.isfile(file):
-    #             shutil.copy(file, "public")
-    # else:
-    #     os.mkdir("public")
-    #     copy_statToPub_contents()
+            logging.info(f"File copied: {destination}")
 
 def main():
     src = 'static'
@@ -43,6 +36,8 @@ def main():
 
     # copy contents from source to destination
     copy_statToPub_contents(src, dst)
+
+    logging.info(f"All contents are copied from {src} to {dst}")
 
     # node = TextNode("This is a text node", "bold", "https://www.boot.dev")
     # print(node)
