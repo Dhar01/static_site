@@ -4,13 +4,16 @@ import logging
 from textnode import TextNode
 from genericpath import exists, isfile
 
+# logging
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 def clear_directory(path: str) -> None:
-    if os.path.exists("public"):
+    if os.path.exists(path):
         shutil.rmtree(path)
+        logging.info(f"Directory '{path}' cleaned!")
     else:
-        os.mkdir('public')
+        os.mkdir(path)
+        logging.info(f"Directory '{path}' created!")
 
 def copy_statToPub_contents(src: str, dest: str) -> None:
     if not os.path.exists(dest):
