@@ -19,25 +19,25 @@ def copy_statToPub_contents(src: str, dest: str) -> None:
     if not os.path.exists(dest):
         os.mkdir(dest)
 
-    for item in os.listdir(src):
-        source = os.path.join(src, item)
-        destination = os.path.join(dest, item)
+    for filename in os.listdir(src):
+        src_path = os.path.join(src, filename)
+        dest_path = os.path.join(dest, filename)
 
-        if os.path.isdir(source):
-            shutil.copytree(source, destination)
-            logging.info(f"Directory copied: {destination}")
+        if os.path.isdir(src_path):
+            shutil.copytree(src_path, dest_path)
+            logging.info(f"Directory copied: {dest_path}")
         else:
-            shutil.copy(source, destination)
-            logging.info(f"File copied: {destination}")
+            shutil.copy(src_path, dest_path)
+            logging.info(f"File copied: {dest_path}")
 
 def main():
     src = 'static'
     dst = 'public'
 
-    # clear the destination directory
+    # clear the dest_path directory
     clear_directory(dst)
 
-    # copy contents from source to destination
+    # copy contents from src_path to dest_path
     copy_statToPub_contents(src, dst)
 
     logging.info(f"All contents are copied from {src} to {dst}")
