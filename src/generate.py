@@ -48,9 +48,3 @@ def generate_pages_recursive(dir_path_content: str, template_path: str, dest_dir
         else:
             next_dest_path = os.path.join(dest_dir_path, filename)
             generate_pages_recursive(entry_path, template_path, next_dest_path)
-
-def main():
-    pass
-
-if __name__ == '__main__':
-    main()

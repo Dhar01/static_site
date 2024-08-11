@@ -1,9 +1,3 @@
 # Static Site Generator
 
-(*will be updated*)
-
-# Table of Contents
-
-# Directory Structure
-
-# Setup
+This is a Static Site Generator written in Python
