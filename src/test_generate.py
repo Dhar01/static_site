@@ -2,7 +2,7 @@ import unittest
 from generate import extract_title
 
 class TestGenerate(unittest.TestCase):
-    def test_generate(self):
+    def test_extract_title(self):
         md = '# Hello'
         result = extract_title(md)
         self.assertEqual(result, 'Hello')
