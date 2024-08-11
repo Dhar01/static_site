@@ -1,34 +1,6 @@
 import os
-import shutil
-import logging
-from genericpath import exists, isfile
+from genericpath import exists, isdir, isfile
 from block_markdown import markdown_to_html_node
-
-# logging
-logging.basicConfig(level=logging.INFO, format="%(message)s")
-
-def clear_directory(path: str) -> None:
-    if os.path.exists(path):
-        shutil.rmtree(path)
-        logging.info(f"Directory '{path}' cleaned!")
-    else:
-        os.mkdir(path)
-        logging.info(f"Directory '{path}' created!")
-
-def copy_statToPub_contents(src: str, dest: str) -> None:
-    if not os.path.exists(dest):
-        os.mkdir(dest)
-
-    for filename in os.listdir(src):
-        src_path = os.path.join(src, filename)
-        dest_path = os.path.join(dest, filename)
-
-        if os.path.isdir(src_path):
-            shutil.copytree(src_path, dest_path)
-            logging.info(f"Directory copied: {dest_path}")
-        else:
-            shutil.copy(src_path, dest_path)
-            logging.info(f"File copied: {dest_path}")
 
 def extract_title(markdown: str) -> str:
     lines = markdown.splitlines()
@@ -65,6 +37,17 @@ def generate_page(from_path: str, template_path: str, dest_path: str) -> None:
     with open(dest_path, 'w') as output_file:
         output_file.write(full_html)
 
+def generate_pages_recursive(dir_path_content: str, template_path: str, dest_dir_path: str) -> None:
+    for filename in os.listdir(dir_path_content):
+        entry_path = os.path.join(dir_path_content, filename)
+
+        if os.path.isfile(entry_path):
+            if filename.endswith('.md'):
+                dest_file_path = os.path.join(dest_dir_path, filename.replace('.md', '.html'))
+                generate_page(entry_path, template_path, dest_file_path)
+        else:
+            next_dest_path = os.path.join(dest_dir_path, filename)
+            generate_pages_recursive(entry_path, template_path, next_dest_path)
 
 def main():
     pass
