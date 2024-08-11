@@ -1,8 +1,13 @@
-from generate import (
+import logging
+
+from copystatic import (
     clear_directory,
-    logging,
-    copy_statToPub_contents,
-    generate_page
+    copy_statToPub_contents
+)
+
+from generate import (
+    generate_page,
+    generate_pages_recursive
 )
 
 def main():
@@ -17,12 +22,20 @@ def main():
 
     logging.info(f"All contents are copied from {src} to {dst}")
 
-    # generating page
-    from_path = 'content/index.md'
-    template_path = 'template.html'
-    dest_path = 'public/index.html'
+    # # generating page
+    # from_path = 'content/index.md'
+    # template_path = 'template.html'
+    # dest_path = 'public/index.html'
 
-    generate_page(from_path, template_path, dest_path)
+    from_path = 'content'
+    template_path = 'template.html'
+    dest_path = 'public'
+
+
+
+    # generate_page(from_path, template_path, dest_path)
+    generate_pages_recursive(from_path, template_path, dest_path)
+
 
 if __name__ == "__main__":
     main()
