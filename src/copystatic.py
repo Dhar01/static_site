@@ -1,29 +1,16 @@
 import os
 import shutil
-import logging
 
-# logging
-logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-def clear_directory(path: str) -> None:
-    if os.path.exists(path):
-        shutil.rmtree(path)
-        logging.info(f"Directory '{path}' cleaned!")
-    else:
-        os.mkdir(path)
-        logging.info(f"Directory '{path}' created!")
+def copy_files_recursive(source_dir_path, dest_dir_path):
+    if not os.path.exists(dest_dir_path):
+        os.mkdir(dest_dir_path)
 
-def copy_statToPub_contents(src: str, dest: str) -> None:
-    if not os.path.exists(dest):
-        os.mkdir(dest)
-
-    for filename in os.listdir(src):
-        src_path = os.path.join(src, filename)
-        dest_path = os.path.join(dest, filename)
-
-        if os.path.isdir(src_path):
-            shutil.copytree(src_path, dest_path)
-            logging.info(f"Directory copied: {dest_path}")
+    for filename in os.listdir(source_dir_path):
+        from_path = os.path.join(source_dir_path, filename)
+        dest_path = os.path.join(dest_dir_path, filename)
+        print(f" * {from_path} -> {dest_path}")
+        if os.path.isfile(from_path):
+            shutil.copy(from_path, dest_path)
         else:
-            shutil.copy(src_path, dest_path)
-            logging.info(f"File copied: {dest_path}")
+            copy_files_recursive(from_path, dest_path)
