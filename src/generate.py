@@ -17,7 +17,8 @@ def generate_page(
 ) -> None:
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
-    print(f"Processing file: {from_path}")
+    print(f"Processing: {from_path}")
+
     try:
         with open(from_path, "r") as markdown_file:
             md = markdown_file.read()
@@ -45,8 +46,7 @@ def generate_page(
         with open(dest_path, "w") as output_file:
             output_file.write(full_html)
     except ValueError as e:
-        print(f"ERROR in file: {from_path}")
-        print(f"Error message: {e}")
+        print(f"Error in file {from_path}: {e}")
         raise
 
 
