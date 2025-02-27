@@ -8,15 +8,16 @@ from inline_markdown import (
     text_to_textNodes,
 )
 
-from textnode import(
+from textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
     text_type_italic,
     text_type_code,
     text_type_link,
-    text_type_image
+    text_type_image,
 )
+
 
 class TestInlineMarkdown(unittest.TestCase):
     def test_split_codeblock(self):
@@ -29,7 +30,7 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("This is text with a ", text_type_text),
                 TextNode("code block", text_type_code),
                 TextNode(" word", text_type_text),
-            ]
+            ],
         )
 
     def test_split_boldItalic(self):
@@ -44,7 +45,7 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("bold", text_type_bold),
                 TextNode(" text with more ", text_type_text),
                 TextNode("bolded", text_type_italic),
-            ]
+            ],
         )
 
     def test_split_images(self):
@@ -59,7 +60,7 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("This is ", text_type_text),
                 TextNode("first", text_type_image, "https://www.first.com"),
                 TextNode(" and another one is ", text_type_text),
-                TextNode("second", text_type_image, "https://www.second.com")
+                TextNode("second", text_type_image, "https://www.second.com"),
             ],
             new_nodes,
         )
@@ -77,7 +78,9 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode("This is text with a link ", text_type_text),
                 TextNode("to boot dev", text_type_link, "https://www.boot.dev"),
                 TextNode(" and ", text_type_text),
-                TextNode("to youtube", text_type_link, "https://www.youtube.com/@bootdotdev"),
+                TextNode(
+                    "to youtube", text_type_link, "https://www.youtube.com/@bootdotdev"
+                ),
             ],
         )
 
@@ -89,7 +92,7 @@ class TestInlineMarkdown(unittest.TestCase):
             [
                 ("rick roll", "https://i.imgur.com/aKaOqIh.gif"),
                 ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg"),
-            ]
+            ],
         )
 
     def test_extract_links(self):
@@ -99,8 +102,8 @@ class TestInlineMarkdown(unittest.TestCase):
             data,
             [
                 ("to boot dev", "https://www.boot.dev"),
-                ("to youtube", "https://www.youtube.com/@bootdotdev")
-            ]
+                ("to youtube", "https://www.youtube.com/@bootdotdev"),
+            ],
         )
 
     def test_conversion_textNode(self):
@@ -116,11 +119,14 @@ class TestInlineMarkdown(unittest.TestCase):
                 TextNode(" word and a ", text_type_text),
                 TextNode("code block", text_type_code),
                 TextNode(" and an ", text_type_text),
-                TextNode("obi wan image", text_type_image, "https://i.imgur.com/fJRm4Vk.jpeg"),
+                TextNode(
+                    "obi wan image", text_type_image, "https://i.imgur.com/fJRm4Vk.jpeg"
+                ),
                 TextNode(" and a ", text_type_text),
                 TextNode("link", text_type_link, "https://boot.dev"),
             ],
         )
+
 
 if __name__ == "__main__":
     unittest.main()
