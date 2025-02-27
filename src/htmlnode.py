@@ -1,5 +1,6 @@
 class HTMLNode:
     """Representing a node in an HTML document tree and rendering"""
+
     def __init__(self, tag=None, value=None, children=None, props=None) -> None:
         self.tag = tag
         self.value = value
@@ -30,6 +31,7 @@ class HTMLNode:
 
 class LeafNode(HTMLNode):
     """Representing single HTML tag with no children --> LeafNode"""
+
     def __init__(self, tag, value, props=None) -> None:
         super().__init__(tag, value, None, props)
 
@@ -49,6 +51,7 @@ class LeafNode(HTMLNode):
 
 class ParentNode(HTMLNode):
     """Handling the nesting of HTML nodes inside of one another --> ParentNode"""
+
     def __init__(self, tag, children, props=None) -> None:
         super().__init__(tag, None, children, props)
 
@@ -68,8 +71,10 @@ class ParentNode(HTMLNode):
     def __repr__(self) -> str:
         return f"ParentNode({self.tag}, Children: {self.children}, {self.props})"
 
+
 def main():
     pass
+
 
 if __name__ == "__main__":
     main()

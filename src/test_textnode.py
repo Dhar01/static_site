@@ -5,11 +5,10 @@ from textnode import (
     text_type_text,
     text_type_bold,
     text_type_italic,
-    text_type_code,
-    text_type_link,
     text_type_image,
     text_node_to_html_node,
 )
+
 
 class testTextNode(unittest.TestCase):
     def test_eq(self):
@@ -37,9 +36,9 @@ class testTextNode(unittest.TestCase):
         node = TextNode("This is a text node", text_type_bold, "https://google.com")
 
         self.assertEqual(
-            "TextNode(This is a text node, bold, https://google.com)",
-            repr(node)
+            "TextNode(This is a text node, bold, https://google.com)", repr(node)
         )
+
 
 class TestTextNodeToHTMLNode(unittest.TestCase):
     def test_text(self):
@@ -59,6 +58,7 @@ class TestTextNodeToHTMLNode(unittest.TestCase):
             html_node.props,
             {"src": "https://boot.dev", "alt": "A image"},
         )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,6 @@
 import re
 
-from textnode import(
+from textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
@@ -10,21 +10,28 @@ from textnode import(
     text_type_image,
 )
 
+
 def extract_markdown_images(text: str) -> list:
     image_pattern = r"!\[(.*?)\]\((.*?)\)"
     return re.findall(image_pattern, text)
+
 
 def extract_markdown_links(text: str) -> list:
     link_pattern = r"\[(.*?)\]\((.*?)\)"
     return re.findall(link_pattern, text)
 
+
 def split_nodes_images(old_nodes: list[TextNode]) -> list[TextNode]:
     return split_contents(old_nodes, text_type_image, extract_markdown_images)
+
 
 def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
     return split_contents(old_nodes, text_type_link, extract_markdown_links)
 
-def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: str) -> list[TextNode]:
+
+def split_nodes_delimiter(
+    old_nodes: list[TextNode], delimiter: str, text_type: str
+) -> list[TextNode]:
     new_nodes = []
 
     for old_node in old_nodes:
@@ -50,7 +57,10 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: 
 
     return new_nodes
 
-def split_contents(old_nodes: list[TextNode], text_type: str, extraction_func) -> list[TextNode]:
+
+def split_contents(
+    old_nodes: list[TextNode], text_type: str, extraction_func
+) -> list[TextNode]:
     new_nodes = []
 
     for old_node in old_nodes:
@@ -76,7 +86,9 @@ def split_contents(old_nodes: list[TextNode], text_type: str, extraction_func) -
             sections = original_text.split(delimiter, 1)
 
             if len(sections) != 2:
-                raise ValueError("Invalid markdown, element section is not closed") # need to show proper messages
+                raise ValueError(
+                    "Invalid markdown, element section is not closed"
+                )  # need to show proper messages
             if sections[0] != "":
                 new_nodes.append(TextNode(sections[0], text_type_text))
 
@@ -88,17 +100,22 @@ def split_contents(old_nodes: list[TextNode], text_type: str, extraction_func) -
 
     return new_nodes
 
+
 def text_to_textNodes(text: str) -> list[TextNode]:
     node = TextNode(text, text_type_text)
-    text_node = split_nodes_delimiter(split_nodes_link(split_nodes_images([node])), "`", text_type_code)
+    text_node = split_nodes_delimiter(
+        split_nodes_link(split_nodes_images([node])), "`", text_type_code
+    )
     text_node = split_nodes_delimiter(text_node, "**", text_type_bold)
     text_node = split_nodes_delimiter(text_node, "*", text_type_italic)
 
     return text_node
 
+
 def main():
     text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
     print(text_to_textNodes(text))
+
 
 if __name__ == "__main__":
     main()
