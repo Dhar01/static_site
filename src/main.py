@@ -1,40 +1,46 @@
-import logging
+import os
+import shutil
 from sys import argv
 from copystatic import copy_files_recursive
 from generate import generate_pages_recursive
+
+dir_path_static = "./static"
+dir_path_public = "./docs"
+dir_path_content = "./content"
+template_path = "./template.html"
+default_basepath = "/"
 
 
 def get_path():
     path = argv
 
     if len(path) < 2:
-        return "/"
+        return default_basepath
 
     return path[1]
 
 
 def main():
-    src = "static"
-    dst = "docs"
-
     basePath = get_path()
-
-    print("Copying static files to public directory...")
-    copy_files_recursive(src, dst)
-
-    logging.info(f"All contents are copied from {src} to {dst}")
 
     # # generating page
     # from_path = 'content/index.md'
     # template_path = 'template.html'
     # dest_path = 'public/index.html'
 
-    from_path = "content"
-    template_path = "template.html"
-    dest_path = dst
+    # from_path = "content"
+    # template_path = "template.html"
+    # dest_path = dst
 
-    # generate_page(from_path, template_path, dest_path)
-    generate_pages_recursive(from_path, template_path, dest_path, basePath)
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
+
+    print("Copying static files to public directory...")
+    copy_files_recursive(dir_path_static, dir_path_public)
+
+    print("Generating content...")
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public, basePath)
 
 
 if __name__ == "__main__":
